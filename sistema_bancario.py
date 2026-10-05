@@ -14,6 +14,20 @@ class CuentaBancaria():
         else:
             print("Fondos insuficientes")
 
+    def transferir(self, cuenta_destino, monto):
+        """
+        Transfiere dinero desde esta cuenta hacia otra cuenta bancaria.
+        """
+        if monto <= self._saldo:
+            self._saldo -= monto
+            cuenta_destino.depositar(monto)
+            print(f"Transferencia exitosa de ${monto} a {cuenta_destino.titular}")
+            return True
+        else:
+            print("Transferencia rechazada: Fondos insuficientes")
+            return False
+
+
 class CuentaAhorros(CuentaBancaria):
     def __init__(self,titular,saldo_inicial,tasa_interes):
         super().__init__(titular, saldo_inicial)
